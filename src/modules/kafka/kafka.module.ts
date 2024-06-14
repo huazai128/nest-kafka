@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { kafkaOptions, MONITOR_SERVICE } from 'config';
 import { KafkaService } from './kafka.service';
-import { KafkaCOntroller } from './kafka.controller';
+import { KafkaController } from './kafka.controller';
 
 @Module({
   imports: [
+    // 生产者注册
     ClientsModule.register([
       {
         name: MONITOR_SERVICE,
@@ -14,7 +15,8 @@ import { KafkaCOntroller } from './kafka.controller';
       },
     ]),
   ],
-  providers: [KafkaService, KafkaCOntroller],
+  controllers: [KafkaController],
+  providers: [KafkaService],
   exports: [KafkaService],
 })
 export class KafkaModule {}

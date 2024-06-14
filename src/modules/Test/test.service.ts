@@ -8,7 +8,7 @@ export interface Item {
 }
 
 @Injectable()
-export class KafkaService implements OnModuleInit {
+export class TestService implements OnModuleInit {
   // topic 话题
   private topic = MONITOR_TOPIC;
 

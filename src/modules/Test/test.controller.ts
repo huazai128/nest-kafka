@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { KafkaService, Item } from './kafka.service';
+import { TestService, Item } from './test.service';
 import { Observable } from 'rxjs';
 import {
   Ctx,
@@ -10,10 +10,10 @@ import {
 import { MONITOR_TOPIC } from 'config';
 
 @Controller()
-export class KafkaController {
-  constructor(private readonly kafkaService: KafkaService) {}
+export class TestController {
+  constructor(private readonly kafkaService: TestService) {}
 
-  @Get('producer')
+  @Get('test')
   getHello(): string {
     Array.from({ length: 1000 }).map((item, index) => {
       this.kafkaService.sendMessage({
@@ -26,6 +26,6 @@ export class KafkaController {
 
   @MessagePattern(MONITOR_TOPIC)
   handleMessage(@Payload() data: Item, @Ctx() context: KafkaContext) {
-    console.log(data, 'data');
+    console.log(data, 'data========');
   }
 }
