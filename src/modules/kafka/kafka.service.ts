@@ -26,10 +26,6 @@ export class KafkaService implements OnModuleInit {
    * @memberof KafkaService
    */
   public sendMessage(data: Item) {
-    return this.client.send<Item>(this.topic, JSON.stringify(data)).subscribe({
-      error: (e) => {
-        console.log(e);
-      },
-    });
+    return this.client.send<Item>(this.topic, JSON.stringify(data));
   }
 }

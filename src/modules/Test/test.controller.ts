@@ -22,7 +22,7 @@ export class TestController {
   }
 
   @Get('test')
-  getTest(): string {
+  getTest() {
     this.kafkaService.sendMessage({
       id: 40,
       name: `kafka`,
@@ -30,8 +30,9 @@ export class TestController {
     return '发送成功';
   }
 
-  @MessagePattern(MONITOR_TOPIC)
-  handleMessage(@Payload() data: Item) {
-    return this.fibonacci(data.id);
-  }
+  // @MessagePattern(MONITOR_TOPIC)
+  // handleMessage(@Payload() data: Item) {
+  //   console.log('data');
+  //   return this.fibonacci(data.id);
+  // }
 }

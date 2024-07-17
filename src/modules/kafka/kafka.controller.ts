@@ -1,31 +1,34 @@
 import { Controller, Get } from '@nestjs/common';
 import { KafkaService, Item } from './kafka.service';
-import { Observable } from 'rxjs';
-import {
-  Ctx,
-  KafkaContext,
-  MessagePattern,
-  Payload,
-} from '@nestjs/microservices';
+import { lastValueFrom } from 'rxjs';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 import { MONITOR_TOPIC } from 'config';
 
 @Controller()
 export class KafkaController {
   constructor(private readonly kafkaService: KafkaService) {}
 
+  private fibonacci(n: number) {
+    return n < 1
+      ? 0
+      : n <= 2
+        ? 1
+        : this.fibonacci(n - 1) + this.fibonacci(n - 2);
+  }
+
   @Get('producer')
-  getHello(): string {
-    Array.from({ length: 1000 }).map((item, index) => {
+  getHello() {
+    return lastValueFrom(
       this.kafkaService.sendMessage({
-        id: index,
-        name: `kafka-${index}`,
-      });
-    });
-    return '发送成功';
+        id: 40,
+        name: `kafka-40`,
+      }),
+    );
   }
 
   @MessagePattern(MONITOR_TOPIC)
-  handleMessage(@Payload() data: Item, @Ctx() context: KafkaContext) {
+  handleMessage(@Payload() data: Item) {
     console.log(data, 'data');
+    return this.fibonacci(data.id);
   }
 }

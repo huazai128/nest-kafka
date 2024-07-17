@@ -32,6 +32,8 @@
 $ yarn install
 ```
 
+node 版本要控制20以上吧
+
 ## Running the app
 
 ```bash
