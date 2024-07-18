@@ -30,9 +30,9 @@ export class TestController {
     return '发送成功';
   }
 
-  // @MessagePattern(MONITOR_TOPIC)
-  // handleMessage(@Payload() data: Item) {
-  //   console.log('data');
-  //   return this.fibonacci(data.id);
-  // }
+  @MessagePattern(MONITOR_TOPIC)
+  handleMessage(@Payload() data: Item) {
+    console.log('data');
+    return this.fibonacci(data.id);
+  }
 }

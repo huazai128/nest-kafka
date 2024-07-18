@@ -1,4 +1,4 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import {
   ClientKafka,
   KafkaHeaders,
@@ -36,7 +36,7 @@ export class CustomKafkaClient extends ClientKafka {
    */
   protected getReplyTopicPartition(topic: string): string {
     const minimumPartition = this.consumerAssignments[topic];
-    return !!minimumPartition ? minimumPartition.toString() : '2'; // 设置最小分区
+    return !!minimumPartition ? minimumPartition.toString() : '0'; // 设置最小分区
   }
 
   /**

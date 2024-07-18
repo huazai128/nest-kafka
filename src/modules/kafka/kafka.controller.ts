@@ -26,9 +26,10 @@ export class KafkaController {
     );
   }
 
-  @MessagePattern(MONITOR_TOPIC)
-  handleMessage(@Payload() data: Item) {
-    console.log(data, 'data');
-    return this.fibonacci(data.id);
-  }
+  // 测试时，另外一个消费者要屏蔽
+  // @MessagePattern(MONITOR_TOPIC)
+  // handleMessage(@Payload() data: Item) {
+  //   console.log(data, 'data');
+  //   return this.fibonacci(data.id);
+  // }
 }
