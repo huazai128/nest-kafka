@@ -3,6 +3,9 @@ import { AppModule } from './app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { kafkaOptions } from 'config';
 import { networkInterfaces } from 'os';
+import * as easyMonitor from 'easy-monitor';
+
+easyMonitor('testOne');
 
 export function getServerIp(): string | undefined {
   const interfaces = networkInterfaces();
